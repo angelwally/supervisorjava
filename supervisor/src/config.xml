@@ -1,0 +1,5 @@
+<config>
+	<host ip="localhost">
+		<plugin name="ping" />
+	</host>
+	</config>
