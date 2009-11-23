@@ -1,5 +1,5 @@
 <config>
-	<host ip="localhost">
-		<plugin name="ping" />
+	<host name="localhost" ip="127.0.0.1">
+		<plugin name="ping" timeout = "2000" />
 	</host>
 	</config>

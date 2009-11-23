@@ -1,4 +1,9 @@
-import java.util.HashMap;
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.XMLConfiguration;
+
+import java.util.*;
+
+import javax.naming.ConfigurationException;
 
 
 public class Parameters {
@@ -17,31 +22,35 @@ public class Parameters {
 	 * @param file
 	 */
 	private void readXML(String file){
-		/*parser le fichier xml
-		creer un objet hostparameter
-		creer un objet plugin
-		mettre chaque plugin dans un PluginParameter
-		ajouter dans le plugin les differents parametres a l'aide de addParameter
-		ajout du plugin dans hostparameter a l'aide de addplugin
-		mettre chaque hostparameter a l'aide de addHost
-		*/
-		HostParameter host = new HostParameter("localhost","127.0.0.1");
-		Plugin plugin = new Ping(host);
-		plugin.addParameter("timeout", "2000");
-		host.addPlugin(plugin);
-		addHost("localhost",host);
-		HostParameter host2 = new HostParameter("norace","10.2.0.222");
-		Plugin plugin2 = new Ping(host2);
-		plugin2.addParameter("timeout", "2000");
-		host2.addPlugin(plugin2);
-		addHost("norace",host2);
 		
+		System.out.println("* Lecture du fichier XML *");
+		try {
+			XMLConfiguration config = new XMLConfiguration("config.xml");
+			List<HierarchicalConfiguration> fields = config.configurationsAt("host");
+			for (HierarchicalConfiguration hc : fields) {
+				HostParameter host = new HostParameter(hc.getString("[@name]"),hc.getString("[@ip]"));
+				List<HierarchicalConfiguration> fields2= hc.configurationsAt("plugin");
+				for (HierarchicalConfiguration hc2 : fields2){
+					Plugin plugin = new Ping(host);
+					Iterator it = hc2.getKeys();
+					while (it.hasNext()){
+						String S = (String) it.next();
+						plugin.addParameter(S, hc2.getString("[@"+S+"]"));
+					}
+					
+				}
+			}
+		} catch (ConfigurationException e){
+			System.out.println(e);
+		} catch (Throwable e){
+			System.out.println(e);
+		}
 	}
 	
 	static public Proxy getProxy(String host){
 		if(parameters.hosts.containsKey(host)){
 			HostParameter hostParameter = parameters.hosts.get(host);
-			if(hostParameter.getName().equals("localhost")){
+			if(hostParameter.getIp().compareTo("localhost")==0){
 				return new ProxyLocal(hostParameter);
 			}
 			else{
