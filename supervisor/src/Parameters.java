@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -32,10 +31,10 @@ public class Parameters {
 		host.addPlugin(plugin);
 		addHost("localhost",host);
 		HostParameter host2 = new HostParameter("norace","10.2.0.222");
-		Plugin plugin2 = new Ping(host);
-		plugin.addParameter("timeout", "2000");
-		host.addPlugin(plugin);
-		addHost("norace",host);
+		Plugin plugin2 = new Ping(host2);
+		plugin2.addParameter("timeout", "2000");
+		host2.addPlugin(plugin2);
+		addHost("norace",host2);
 		
 	}
 	

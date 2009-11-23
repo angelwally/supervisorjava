@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 
 public class Ping extends GlobalPlugin implements Plugin{
-	
+
 	public Ping(HostParameter host){
 		this.name = "ping";
 		this.host = host;
@@ -28,7 +30,7 @@ public class Ping extends GlobalPlugin implements Plugin{
 		else{
 			response.put("1", "Ping OK");
 		}
-		
+
 		return response;
 	}
 
@@ -41,12 +43,23 @@ public class Ping extends GlobalPlugin implements Plugin{
 	@Override
 	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
 		// TODO Auto-generated method stub
-		if(InetAddress.getByName(host.getIp()).isReachable(Integer.parseInt(params.get("timeout")))){
-			System.out.println("PING OK");
+		try {
+			InetAddress address = InetAddress.getByName(host.getIp());
+			System.out.println("Nom: " + address.getHostName());
+			System.out.println("Addrese: " + address.getHostAddress());
+			System.out.print("Ping: ");
+			if(address.isReachable(Integer.parseInt(params.get("timeout"))))
+				System.out.println("OK");
+			else
+				System.out.println("Impossible");
 		}
-		else{
-			System.out.println("Impossible de joindre l'hôte distant.");
+		catch (UnknownHostException e) {
+			System.err.println("Impossible de résoudre l'hôte "+host.getName());
 		}
+		catch (IOException e) {
+			System.err.println("Impossible d'atteindre "+host.getName());
+		}
+
 		return true;
 	}
 
