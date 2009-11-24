@@ -2,6 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/manu/workspace/Supervisor/commons-configuration-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Angel/Documents/Projet java/supervisor/commons-configuration-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Angel/Documents/Projet java/supervisor/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angel/Documents/Projet java/supervisor/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angel/Documents/Projet java/supervisor/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

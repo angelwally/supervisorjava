@@ -6,7 +6,7 @@ public class GlobalPlugin {
 	
 	protected String name;
 	protected HashMap<String,String> params = new HashMap<String,String>();
-	protected HostParameter host;
+	protected Host host;
 	
 	
 	public void addParameter(String key,String value){

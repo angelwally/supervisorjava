@@ -1,19 +1,14 @@
-import org.apache.commons.configuration.HierarchicalConfiguration;
-import org.apache.commons.configuration.XMLConfiguration;
-
 import java.util.*;
-
-import javax.naming.ConfigurationException;
-
+import org.apache.commons.configuration.*;
 
 public class Parameters {
 	
 	static private Parameters parameters;
 	
-	private HashMap<String,HostParameter> hosts;
+	private HashMap<String,Host> hosts;
 
 	private Parameters(String path){
-		hosts = new HashMap<String,HostParameter>();
+		hosts = new HashMap<String,Host>();
 		readXML(path);
 	}
 	
@@ -28,17 +23,25 @@ public class Parameters {
 			XMLConfiguration config = new XMLConfiguration("config.xml");
 			List<HierarchicalConfiguration> fields = config.configurationsAt("host");
 			for (HierarchicalConfiguration hc : fields) {
-				HostParameter host = new HostParameter(hc.getString("[@name]"),hc.getString("[@ip]"));
+				Host host = new Host(hc.getString("[@name]"),hc.getString("[@ip]"));
 				List<HierarchicalConfiguration> fields2= hc.configurationsAt("plugin");
 				for (HierarchicalConfiguration hc2 : fields2){
-					Plugin plugin = new Ping(host);
+					Plugin plugin = Parameters.getPlugin(hc2.getString("[@name]"), host);
+					if(plugin==null){
+						System.out.println("Erreur. Le plugin "+hc2.getString("[@name]")+"n'existe pas.");
+						continue;
+					}
 					Iterator it = hc2.getKeys();
 					while (it.hasNext()){
-						String S = (String) it.next();
-						plugin.addParameter(S, hc2.getString("[@"+S+"]"));
+						String key = (String) it.next();
+						if(key.equals("[@name]"))
+							continue;
+						plugin.addParameter(key, hc2.getString(key));
 					}
+					host.addPlugin(plugin);
 					
 				}
+				hosts.put(host.getName(), host);
 			}
 		} catch (ConfigurationException e){
 			System.out.println(e);
@@ -47,16 +50,23 @@ public class Parameters {
 		}
 	}
 	
-	static public Proxy getProxy(String host){
-		if(parameters.hosts.containsKey(host)){
-			HostParameter hostParameter = parameters.hosts.get(host);
-			if(hostParameter.getIp().compareTo("localhost")==0){
-				return new ProxyLocal(hostParameter);
+	static public Proxy getProxy(String hostName){
+		if(parameters.hosts.containsKey(hostName)){
+			Host host = parameters.hosts.get(hostName);
+			if(host.getIp().compareTo("localhost")==0){
+				return new ProxyLocal(host);
 			}
 			else{
-				return new ProxyRemote(hostParameter);
+				return new ProxyRemote(host);
 			}			
 		}
+		else
+			return null;
+	}
+	
+	static public Plugin getPlugin(String pluginName,Host host){
+		if(pluginName.equals("ping"))
+			return new Ping(host);
 		else
 			return null;
 	}
@@ -66,7 +76,7 @@ public class Parameters {
 			parameters = new Parameters(path);
 	}
 	
-	public void addHost(String nomHost,HostParameter host){
+	public void addHost(String nomHost,Host host){
 		hosts.put(nomHost, host);
 	}
 	

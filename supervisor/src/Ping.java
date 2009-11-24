@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 public class Ping extends GlobalPlugin implements Plugin{
 
-	public Ping(HostParameter host){
+	public Ping(Host host){
 		this.name = "ping";
 		this.host = host;
-		params.put("timeout", "1000");
+		params.put("[@timeout]", "1000");
 	}
 	@Override
 	public ArrayList<String> getParamNameList() throws Exception {
@@ -24,11 +24,11 @@ public class Ping extends GlobalPlugin implements Plugin{
 	public HashMap<String, String> polling() throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String,String> response = new HashMap<String,String>();
-		if(java.net.InetAddress.getLocalHost().isReachable(Integer.parseInt(params.get("timeout")))){
+		if(java.net.InetAddress.getLocalHost().isReachable(Integer.parseInt(params.get("[@timeout]")))){
 			response.put("1", "Ping OK");
 		}
 		else{
-			response.put("1", "Ping OK");
+			response.put("1", "Ping erreur");
 		}
 
 		return response;
@@ -48,7 +48,7 @@ public class Ping extends GlobalPlugin implements Plugin{
 			System.out.println("Nom: " + address.getHostName());
 			System.out.println("Addrese: " + address.getHostAddress());
 			System.out.print("Ping: ");
-			if(address.isReachable(Integer.parseInt(params.get("timeout"))))
+			if(address.isReachable(Integer.parseInt(params.get("[@timeout]"))))
 				System.out.println("OK");
 			else
 				System.out.println("Impossible");

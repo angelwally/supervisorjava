@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class ProxyLocal implements Proxy {
 	
-	private HostParameter hostParameter;
+	private Host host;
 
-	public ProxyLocal(HostParameter hostParameter){
-		this.hostParameter = hostParameter;
+	public ProxyLocal(Host host){
+		this.host = host;
 	}
 	@Override
 	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
@@ -14,7 +14,7 @@ public class ProxyLocal implements Proxy {
 		if(cmd.size()==1)
 			showHelp();
 		else{
-			if(!hostParameter.launchCommand(cmd))
+			if(!host.launchCommand(cmd))
 				return false;
 		}
 		return true;

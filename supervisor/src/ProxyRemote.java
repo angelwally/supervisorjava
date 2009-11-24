@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class ProxyRemote implements Proxy {
 	
-	private HostParameter hostParameter;
+	private Host host;
 
-	public ProxyRemote(HostParameter hostParameter){
-		this.hostParameter = hostParameter;
+	public ProxyRemote(Host host){
+		this.host = host;
 	}
 
 	@Override
@@ -15,7 +15,7 @@ public class ProxyRemote implements Proxy {
 		if(cmd.size()==1)
 			showHelp();
 		else{
-			if(!hostParameter.launchCommand(cmd))
+			if(!host.launchCommand(cmd))
 				return false;
 		}
 		return true;

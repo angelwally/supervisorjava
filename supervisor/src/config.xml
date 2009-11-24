@@ -2,4 +2,7 @@
 	<host name="localhost" ip="127.0.0.1">
 		<plugin name="ping" timeout = "2000" />
 	</host>
-	</config>
+	<host name="norace" ip="10.2.0.222">
+		<plugin name="ping" timeout="500" />
+	</host>
+</config>
