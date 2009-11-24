@@ -67,6 +67,10 @@ public class Parameters {
 	static public Plugin getPlugin(String pluginName,Host host){
 		if(pluginName.equals("ping"))
 			return new Ping(host);
+		else if(pluginName.endsWith("memory"))
+			return new Memory(host);
+		else if(pluginName.endsWith("cpu"))
+			return new CPU(host);
 		else
 			return null;
 	}
