@@ -1,4 +1,7 @@
+package supervisor.rmi.client;
 import java.util.ArrayList;
+
+import supervisor.rmi.common.Host;
 
 
 public class ProxyLocal implements Proxy {

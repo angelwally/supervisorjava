@@ -1,5 +1,13 @@
+package supervisor.rmi.client;
+
 import java.util.*;
 import org.apache.commons.configuration.*;
+
+import supervisor.rmi.common.CPU;
+import supervisor.rmi.common.Host;
+import supervisor.rmi.common.Memory;
+import supervisor.rmi.common.Ping;
+import supervisor.rmi.common.Plugin;
 
 public class Parameters {
 	
@@ -53,7 +61,7 @@ public class Parameters {
 	static public Proxy getProxy(String hostName){
 		if(parameters.hosts.containsKey(hostName)){
 			Host host = parameters.hosts.get(hostName);
-			if(host.getIp().compareTo("localhost")==0){
+			if(host.getName().compareTo("localhost")==0){
 				return new ProxyLocal(host);
 			}
 			else{

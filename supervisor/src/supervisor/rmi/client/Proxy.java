@@ -1,3 +1,4 @@
+package supervisor.rmi.client;
 import java.util.ArrayList;
 
 

@@ -1,8 +1,12 @@
+package supervisor.rmi.client;
 import java.util.ArrayList;
+import java.rmi.*;
 
+import supervisor.rmi.common.Host;
+import supervisor.rmi.common.Plugin;
 
 public class ProxyRemote implements Proxy {
-	
+
 	private Host host;
 
 	public ProxyRemote(Host host){
@@ -11,19 +15,24 @@ public class ProxyRemote implements Proxy {
 
 	@Override
 	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
-		// TODO Auto-generated method stub
-		if(cmd.size()==1)
-			showHelp();
-		else{
-			if(!host.launchCommand(cmd))
-				return false;
+
+		try {
+
+			Plugin plugin = (Plugin)Naming.lookup("rmi://localhost:1099");
+
+			plugin.launchCommand(cmd);
 		}
+		catch(Exception e) {
+			System.err.println("Erreur: " + e.getMessage());
+		}
+		
+
 		return true;
 	}
 
 	@Override
 	public void showHelp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
