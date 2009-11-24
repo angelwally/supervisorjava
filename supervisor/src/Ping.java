@@ -41,10 +41,10 @@ public class Ping extends GlobalPlugin implements Plugin{
 
 	}
 	@Override
-	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
+	public boolean launchCommand(ArrayList<String> cmd){
 		// TODO Auto-generated method stub
 		try {
-			InetAddress address = InetAddress.getByName(host.getIp());
+			InetAddress address = InetAddress.getByName(cmd.get(2));
 			System.out.println("Nom: " + address.getHostName());
 			System.out.println("Addrese: " + address.getHostAddress());
 			System.out.print("Ping: ");
@@ -54,10 +54,14 @@ public class Ping extends GlobalPlugin implements Plugin{
 				System.out.println("Impossible");
 		}
 		catch (UnknownHostException e) {
-			System.err.println("Impossible de résoudre l'hôte "+host.getName());
+			System.err.println("Impossible de résoudre l'hôte "+cmd.get(2));
 		}
 		catch (IOException e) {
-			System.err.println("Impossible d'atteindre "+host.getName());
+			System.err.println("Impossible d'atteindre "+cmd.get(2));
+		}
+		catch(NullPointerException e){
+			System.err.println("Erreur de syntaxe.");
+			return false;
 		}
 
 		return true;
