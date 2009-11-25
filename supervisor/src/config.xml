@@ -1,10 +1,10 @@
 <config>
 	<host name="localhost" ip="127.0.0.1">
-		<plugin name="ping" timeout = "2000" />
+		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222" />
 		<plugin name="memory" />
 		<plugin name="cpu" />		
 	</host>
 	<host name="norace" ip="10.2.0.222">
-		<plugin name="ping" timeout="500" />
+		<plugin name="ping" timeout="500"  ipTo="10.2.0.222"/>
 	</host>
 </config>

@@ -1,5 +1,6 @@
 package supervisor.rmi.common;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Host {
@@ -25,20 +26,20 @@ public class Host {
 		return plugins.add(plugin);
 	}
 	
-	private Plugin getPlugin(String pluginName){
+	/*private Plugin getPlugin(String pluginName){
 		for(int i=0;i<plugins.size();i++){
 			Plugin plugin = plugins.get(i);
 			if(plugin.getName().equals(pluginName))
 				return plugin;
 		}
 		return null;
-	}
+	}*/
 	
-	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
-		Plugin plugin = getPlugin(cmd.get(1));
-		if(plugin==null)
-			return false;
-		else
-			return plugin.launchCommand(cmd);
+	public HashMap<String,String> polling() throws Exception{
+		for(int i=0;i<plugins.size();i++){
+			Plugin plugin = plugins.get(i);
+			return plugin.polling();
+		}
+		return null;
 	}
 }

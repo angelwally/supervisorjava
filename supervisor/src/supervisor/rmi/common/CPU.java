@@ -1,13 +1,14 @@
 package supervisor.rmi.common;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
 public class CPU extends GlobalPlugin implements Plugin {
 
-	public CPU(Host host) {
+	public CPU(Host host) throws RemoteException{
+		super(host);
 		this.name = "cpu";
-		this.host = host;
 	}
 
 	@Override
@@ -18,17 +19,6 @@ public class CPU extends GlobalPlugin implements Plugin {
 
 	@Override
 	public HashMap<String, String> polling() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setParam(HashMap<String, String> lstParam) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-	
-	public boolean launchCommand(ArrayList<String> cmd) throws Exception {
 		
 		Sigar sigar = new Sigar();			
 		
@@ -41,6 +31,6 @@ public class CPU extends GlobalPlugin implements Plugin {
 		for (CpuPerc cpuPerc : cpuPercList) System.out.println(cpuPerc);
 		System.out.println("ProcStat;: " + sigar.getProcStat());
 		
-		return true;
+		return null;
 	}
 }

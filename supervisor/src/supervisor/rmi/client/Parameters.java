@@ -1,5 +1,9 @@
 package supervisor.rmi.client;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.*;
 import org.apache.commons.configuration.*;
 
@@ -8,24 +12,26 @@ import supervisor.rmi.common.Host;
 import supervisor.rmi.common.Memory;
 import supervisor.rmi.common.Ping;
 import supervisor.rmi.common.Plugin;
+import supervisor.rmi.common.Proxy;
+import supervisor.rmi.server.ProxyRemote;
 
 public class Parameters {
-	
+
 	static private Parameters parameters;
-	
-	private HashMap<String,Host> hosts;
+
+	private ArrayList<Host> hosts;
 
 	private Parameters(String path){
-		hosts = new HashMap<String,Host>();
+		hosts = new ArrayList<Host>();
 		readXML(path);
 	}
-	
+
 	/**
 	 * Parse le fichier file
 	 * @param file
 	 */
 	private void readXML(String file){
-		
+
 		System.out.println("* Lecture du fichier XML *");
 		try {
 			XMLConfiguration config = new XMLConfiguration("config.xml");
@@ -34,45 +40,65 @@ public class Parameters {
 				Host host = new Host(hc.getString("[@name]"),hc.getString("[@ip]"));
 				List<HierarchicalConfiguration> fields2= hc.configurationsAt("plugin");
 				for (HierarchicalConfiguration hc2 : fields2){
-					Plugin plugin = Parameters.getPlugin(hc2.getString("[@name]"), host);
+					Plugin plugin = this.getPlugin(hc2.getString("[@name]"), host);
 					if(plugin==null){
 						System.out.println("Erreur. Le plugin "+hc2.getString("[@name]")+"n'existe pas.");
 						continue;
 					}
 					Iterator it = hc2.getKeys();
+					HashMap<String,String> params = new HashMap<String,String>();
 					while (it.hasNext()){
 						String key = (String) it.next();
 						if(key.equals("[@name]"))
 							continue;
-						plugin.addParameter(key, hc2.getString(key));
+						params.put(key, hc2.getString(key));
 					}
+					plugin.setParam(params);
 					host.addPlugin(plugin);
-					
+
 				}
-				hosts.put(host.getName(), host);
+				hosts.add(host);
 			}
 		} catch (ConfigurationException e){
 			System.out.println(e);
-		} catch (Throwable e){
+		}
+		catch(RemoteException e){
+			e.printStackTrace();
+		}
+		catch (Throwable e){
 			System.out.println(e);
 		}
 	}
-	
-	static public Proxy getProxy(String hostName){
+
+	/*static public Proxy getProxy(String hostName){
 		if(parameters.hosts.containsKey(hostName)){
 			Host host = parameters.hosts.get(hostName);
 			if(host.getName().compareTo("localhost")==0){
-				return new ProxyLocal(host);
+				Proxy proxy = new ProxyLocal();
+				proxy.addHost(host);
+				return proxy;
 			}
 			else{
-				return new ProxyRemote(host);
+				try {
+					Proxy proxy = (Proxy)Naming.lookup("rmi://localhost:1099");
+					proxy.addHost(host);
+					return proxy;
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NotBoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}			
 		}
-		else
-			return null;
-	}
-	
-	static public Plugin getPlugin(String pluginName,Host host){
+		return null;
+	}*/
+
+	private Plugin getPlugin(String pluginName,Host host) throws RemoteException{
 		if(pluginName.equals("ping"))
 			return new Ping(host);
 		else if(pluginName.endsWith("memory"))
@@ -82,14 +108,39 @@ public class Parameters {
 		else
 			return null;
 	}
-	
-	static public void setParameters(String path){
+
+	static public Parameters setParameters(String path){
 		if(parameters == null)
 			parameters = new Parameters(path);
+		return parameters;
 	}
 	
-	public void addHost(String nomHost,Host host){
-		hosts.put(nomHost, host);
+	public HashMap<String,String> polling() throws Exception{
+		for(int i=0;i<hosts.size();i++){
+			Host host = hosts.get(i);
+			if(host.getName().compareTo("localhost")==0){
+				Proxy proxy = new ProxyLocal();
+				proxy.addHost(host);
+				proxy.polling();
+			}
+			else{
+				try {
+					Proxy proxy = (Proxy)Naming.lookup("rmi://localhost:1099/test");
+					proxy.addHost(host);
+					proxy.polling();
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NotBoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+		}
+		return null;
 	}
-	
+
 }

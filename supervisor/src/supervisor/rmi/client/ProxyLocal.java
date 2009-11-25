@@ -1,32 +1,27 @@
 package supervisor.rmi.client;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import supervisor.rmi.common.Host;
+import supervisor.rmi.common.Proxy;
 
 
 public class ProxyLocal implements Proxy {
 	
 	private Host host;
 
-	public ProxyLocal(Host host){
-		this.host = host;
+	public ProxyLocal(){
 	}
-	@Override
-	public boolean launchCommand(ArrayList<String> cmd) throws Exception{
+
+	public HashMap<String,String> polling() throws Exception{
 		// TODO Auto-generated method stub
-		if(cmd.size()==1)
-			showHelp();
-		else{
-			if(!host.launchCommand(cmd))
-				return false;
-		}
-		return true;
+		return host.polling();
 		
 	}
+
 	@Override
-	public void showHelp() {
-		// TODO Auto-generated method stub
-		System.out.println("L'aide c'est cool!");
+	public void addHost(Host host) {
+		this.host = host;
 		
 	}
 

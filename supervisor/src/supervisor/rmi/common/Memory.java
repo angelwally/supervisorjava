@@ -1,13 +1,14 @@
 package supervisor.rmi.common;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
 public class Memory extends GlobalPlugin implements Plugin {
 
-	public Memory(Host host) {
+	public Memory(Host host) throws RemoteException{
+		super(host);
 		this.name = "memory";
-		this.host = host;
 		//params.put("[@timeout]", "1000");
 	}
 
@@ -19,18 +20,6 @@ public class Memory extends GlobalPlugin implements Plugin {
 
 	@Override
 	public HashMap<String, String> polling() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setParam(HashMap<String, String> lstParam) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean launchCommand(ArrayList<String> cmd) throws Exception {
 		
 		Sigar sigar = new Sigar();			
 
@@ -41,6 +30,6 @@ public class Memory extends GlobalPlugin implements Plugin {
 		System.out.println(sigar.getMem()+ ", "+ memPourcent2 +"% free");
 		System.out.println(sigar.getSwap());		
 		
-		return true;
+		return null;
 	}
 }

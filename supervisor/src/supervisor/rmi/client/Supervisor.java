@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import supervisor.rmi.common.Proxy;
+
 
 
 public class Supervisor {
@@ -14,10 +16,10 @@ public class Supervisor {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Parameters.setParameters("config.xml");
+		Parameters parameters = Parameters.setParameters("config.xml");
 
 		while(true){
-			System.out.print("#");
+			/*System.out.print("#");
 			String cmd = lireString();
 			if(cmd.compareTo("")==0)
 				continue;
@@ -37,26 +39,24 @@ public class Supervisor {
 				showHelp();
 			}
 			else{
-
-				Proxy proxy = Parameters.getProxy(cmds.get(0));
-
-				if(proxy!=null){
-					try{
-						if(!proxy.launchCommand(cmds))
-							System.out.println("Impossible de lancer la commande.");
-					}
-					catch(Exception e){
-						e.printStackTrace();
-					}
-				}
-				else
-					System.out.println("Erreur dans la commande. La machine n'existe pas.");		
+			 */
+			try {
+				parameters.polling();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-
 	}
+}
 
-	public static String lireString(){//lecture d'une chaine
+/*public static String lireString(){//lecture d'une chaine
 		String ligne_lue=null;
 		try{
 			InputStreamReader lecteur=new InputStreamReader(System.in);
@@ -71,6 +71,5 @@ public class Supervisor {
 
 	public static void showHelp(){
 
-	}
+	}*/
 
-}
