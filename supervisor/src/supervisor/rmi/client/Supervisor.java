@@ -19,7 +19,6 @@ public class Supervisor {
 		// TODO Auto-generated method stub
 		Parameters parameters = Parameters.setParameters("config.xml");
 		
-		System.setSecurityManager(new RMISecurityManager());
 		while(true){
 			/*System.out.print("#");
 			String cmd = lireString();
