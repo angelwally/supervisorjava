@@ -1,10 +1,11 @@
 package supervisor.rmi.common;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
 
-public class GlobalPlugin  extends UnicastRemoteObject{
+public class GlobalPlugin  extends UnicastRemoteObject implements Serializable{
 	
 	protected String name;
 	protected HashMap<String,String> inputParams = new HashMap<String,String>();

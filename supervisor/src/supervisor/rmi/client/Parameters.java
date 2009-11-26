@@ -125,7 +125,7 @@ public class Parameters {
 			}
 			else{
 				try {
-					Proxy proxy = (Proxy)Naming.lookup("rmi://localhost:1099/test");
+					Proxy proxy = (Proxy)Naming.lookup("rmi://localhost:1099/myserver");
 					proxy.addHost(host);
 					proxy.polling();
 				} catch (MalformedURLException e) {

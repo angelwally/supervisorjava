@@ -1,9 +1,10 @@
 package supervisor.rmi.common;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Host {
+public class Host implements Serializable{
 	
 	private String name;
 	private String ip;
@@ -38,7 +39,7 @@ public class Host {
 	public HashMap<String,String> polling() throws Exception{
 		for(int i=0;i<plugins.size();i++){
 			Plugin plugin = plugins.get(i);
-			return plugin.polling();
+			plugin.polling();
 		}
 		return null;
 	}

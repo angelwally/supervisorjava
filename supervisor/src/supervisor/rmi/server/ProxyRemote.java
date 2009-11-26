@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.net.MalformedURLException;
 import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import supervisor.rmi.common.Host;
@@ -18,27 +20,27 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 
 	@Override
 	public HashMap<String,String> polling() throws Exception{
+		System.out.println("Polling en cours...");
 		return host.polling();
+		
 	}
 
 	@Override
-	public void addHost(Host host) {
+	public void addHost(Host host) throws RemoteException{
 		this.host = host;
 	}
 
 	public static void main(String[] args) {
 
 		try {
+			Registry r = LocateRegistry.getRegistry();
 			ProxyRemote proxy = new ProxyRemote();
-			Naming.rebind("rmi://localhost:1099/test", proxy);
+			r.bind("myserver", proxy);
+			/*Naming.rebind("rmi://localhost:1099/test", proxy);*/
 			System.out.println("Serveur prêt");
-
 		}
-
 		catch(Exception e) {
 			System.err.println("Erreur: " + e.getMessage());
 		}
-
-
 	}
 }
