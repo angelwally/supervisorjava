@@ -1,6 +1,8 @@
 package supervisor.rmi.server;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
@@ -20,7 +22,6 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 
 	@Override
 	public HashMap<String,String> polling() throws Exception{
-		System.out.println("Polling en cours...");
 		return host.polling();
 		
 	}
@@ -32,7 +33,7 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 
 	public static void main(String[] args) {
 
-		try {
+		try{		
 			Registry r = LocateRegistry.getRegistry();
 			ProxyRemote proxy = new ProxyRemote();
 			r.bind("myserver", proxy);
@@ -41,6 +42,7 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 		}
 		catch(Exception e) {
 			System.err.println("Erreur: " + e.getMessage());
+			System.exit(0);
 		}
 	}
 }
