@@ -35,6 +35,7 @@ public class Ping extends GlobalPlugin implements Plugin{
 				System.out.println("OK");
 			else
 				System.out.println("Impossible");
+			System.out.println(address.getHostName());
 		}
 		catch (UnknownHostException e) {
 			System.err.println("Impossible de résoudre l'hôte ");

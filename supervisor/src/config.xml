@@ -2,8 +2,9 @@
 	<host name="localhost" ip="127.0.0.1">
 		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222" />	
 	</host>
-	<host name="norace" ip="127.0.0.1">
-		<plugin name="ping" timeout="500"  ipTo="10.2.0.222"/>
+	<host name="norace" ip="10.2.0.165">
+		<plugin name="ping" timeout="2000"  ipTo="10.2.0.222"/>
 		<plugin name="cpu" />
+		<plugin name="memory" />
 	</host>
 </config>

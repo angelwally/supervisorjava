@@ -8,8 +8,6 @@ import java.util.StringTokenizer;
 
 import supervisor.rmi.common.Proxy;
 
-
-
 public class Supervisor {
 
 	/**
@@ -18,6 +16,7 @@ public class Supervisor {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Parameters parameters = Parameters.setParameters("config.xml");
+		System.setSecurityManager(new RMISecurityManager());
 		
 		while(true){
 			/*System.out.print("#");
