@@ -9,6 +9,11 @@ import java.util.HashMap;
 
 public class Ping extends GlobalPlugin implements Plugin{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Ping(Host host) throws RemoteException{
 		super(host);
 		this.name = "ping";

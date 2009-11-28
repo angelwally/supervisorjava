@@ -6,6 +6,11 @@ import org.hyperic.sigar.*;
 
 public class Memory extends GlobalPlugin implements Plugin {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Memory(Host host) throws RemoteException{
 		super(host);
 		this.name = "memory";

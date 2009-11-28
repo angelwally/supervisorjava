@@ -1,20 +1,19 @@
 package supervisor.rmi.server;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import supervisor.rmi.common.Host;
-import supervisor.rmi.common.Plugin;
 import supervisor.rmi.common.Proxy;
 
 public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Host host;
 
 	public ProxyRemote() throws RemoteException{

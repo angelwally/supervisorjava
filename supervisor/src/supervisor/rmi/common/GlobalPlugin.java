@@ -7,6 +7,10 @@ import java.util.HashMap;
 
 public class GlobalPlugin  extends UnicastRemoteObject implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected HashMap<String,String> inputParams = new HashMap<String,String>();
 	protected Host host;

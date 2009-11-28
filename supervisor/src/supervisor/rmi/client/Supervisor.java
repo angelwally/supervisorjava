@@ -1,12 +1,5 @@
 package supervisor.rmi.client;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.rmi.RMISecurityManager;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
-import supervisor.rmi.common.Proxy;
 
 public class Supervisor {
 

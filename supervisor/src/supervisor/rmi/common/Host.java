@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 public class Host implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String ip;
 	private ArrayList<Plugin> plugins = new ArrayList<Plugin>();

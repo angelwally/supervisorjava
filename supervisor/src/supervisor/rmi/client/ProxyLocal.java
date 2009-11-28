@@ -1,6 +1,5 @@
 package supervisor.rmi.client;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import supervisor.rmi.common.Host;

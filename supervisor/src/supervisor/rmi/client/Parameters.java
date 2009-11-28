@@ -8,12 +8,12 @@ import java.util.*;
 import org.apache.commons.configuration.*;
 
 import supervisor.rmi.common.CPU;
+import supervisor.rmi.common.FileSys;
 import supervisor.rmi.common.Host;
 import supervisor.rmi.common.Memory;
 import supervisor.rmi.common.Ping;
 import supervisor.rmi.common.Plugin;
 import supervisor.rmi.common.Proxy;
-import supervisor.rmi.server.ProxyRemote;
 
 public class Parameters {
 
@@ -45,7 +45,7 @@ public class Parameters {
 						System.out.println("Erreur. Le plugin "+hc2.getString("[@name]")+"n'existe pas.");
 						continue;
 					}
-					Iterator it = hc2.getKeys();
+					Iterator<String> it = hc2.getKeys();
 					HashMap<String,String> params = new HashMap<String,String>();
 					while (it.hasNext()){
 						String key = (String) it.next();
@@ -70,34 +70,6 @@ public class Parameters {
 		}
 	}
 
-	/*static public Proxy getProxy(String hostName){
-		if(parameters.hosts.containsKey(hostName)){
-			Host host = parameters.hosts.get(hostName);
-			if(host.getName().compareTo("localhost")==0){
-				Proxy proxy = new ProxyLocal();
-				proxy.addHost(host);
-				return proxy;
-			}
-			else{
-				try {
-					Proxy proxy = (Proxy)Naming.lookup("rmi://localhost:1099");
-					proxy.addHost(host);
-					return proxy;
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}			
-		}
-		return null;
-	}*/
-
 	private Plugin getPlugin(String pluginName,Host host) throws RemoteException{
 		if(pluginName.equals("ping"))
 			return new Ping(host);
@@ -105,6 +77,8 @@ public class Parameters {
 			return new Memory(host);
 		else if(pluginName.endsWith("cpu"))
 			return new CPU(host);
+		else if(pluginName.equals("filesystem"))
+			return new FileSys(host);
 		else
 			return null;
 	}
@@ -125,6 +99,7 @@ public class Parameters {
 			}
 			else{
 				try {
+					System.out.println("try to connect "+"rmi://"+host.getIp()+":1099/myserver");
 					Proxy proxy = (Proxy)Naming.lookup("rmi://"+host.getIp()+":1099/myserver");
 					proxy.addHost(host);
 					proxy.polling();
