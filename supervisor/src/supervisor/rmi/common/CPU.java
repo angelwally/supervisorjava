@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
-public class CPU extends GlobalPlugin implements Plugin {
+public class CPU extends GlobalPlugin {
 
 	/**
 	 * 
@@ -23,19 +23,26 @@ public class CPU extends GlobalPlugin implements Plugin {
 	}
 
 	@Override
-	public HashMap<String, String> polling() throws Exception {
-		
-		Sigar sigar = new Sigar();			
-		
-		CpuInfo[] cpuInfoList = sigar.getCpuInfoList();
-		for (CpuInfo cpuInfo : cpuInfoList) System.out.println(cpuInfo);
-		
-		
-		System.out.println("** CPU sur " + host.getName() + " **");	
-		CpuPerc[] cpuPercList = sigar.getCpuPercList();
-		for (CpuPerc cpuPerc : cpuPercList) System.out.println(cpuPerc);
-		System.out.println("ProcStat;: " + sigar.getProcStat());
-		
+	public HashMap<String, String> polling() throws RemoteException {
+		try {
+			Sigar sigar = new Sigar();			
+
+			CpuInfo[] cpuInfoList;
+
+			cpuInfoList = sigar.getCpuInfoList();
+			for (CpuInfo cpuInfo : cpuInfoList) System.out.println(cpuInfo);
+
+
+			System.out.println("** CPU sur " + host.getName() + " **");	
+			CpuPerc[] cpuPercList = sigar.getCpuPercList();
+			for (CpuPerc cpuPerc : cpuPercList) System.out.println(cpuPerc);
+			System.out.println("ProcStat;: " + sigar.getProcStat());
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 		return null;
 	}
 }

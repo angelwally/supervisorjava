@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
 
-public class GlobalPlugin  extends UnicastRemoteObject implements Serializable{
+public abstract class GlobalPlugin  extends UnicastRemoteObject implements Serializable,Plugin{
 	
 	/**
 	 * 

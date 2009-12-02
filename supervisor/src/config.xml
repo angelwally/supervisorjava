@@ -1,17 +1,21 @@
 <config>
-	<host name="localhost" ip="127.0.0.1">
-		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222" />	
+	<host name="localhost" ip="127.0.0.1" refresh="2000">
+		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222">
+			<view type="flux" value="Ping : @ping"/>
+			<view type="condition" value="@ping>45"/>
+		</plugin>	
 		<plugin name="cpu" />
 		<plugin name="memory" />
 		<plugin name="filesystem" />
 		<plugin name="net" />
 	</host>
 	
-	<host name="norace" ip="10.2.0.165">
+	<host name="norace" ip="10.2.0.165" refresh="2000">
 		<plugin name="ping" timeout="2000"  ipTo="10.2.0.222"/>
 		<plugin name="cpu" />
 		<plugin name="memory" />
 		<plugin name="filesystem" />
+		<plugin name="telnet" ipTo="smtp.rez-rennes.supelec.fr" timeout="1000"/>
 	</host>
 	
 </config>

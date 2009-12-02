@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 
 
-public class Ping extends GlobalPlugin implements Plugin{
+public class Ping extends GlobalPlugin{
 
 	/**
 	 * 
@@ -24,25 +24,29 @@ public class Ping extends GlobalPlugin implements Plugin{
 	public ArrayList<String> getParamNameList() throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<String> array = new ArrayList<String>();
-		array.add("timeout");
+		array.add("name");
+		array.add("address");
+		array.add("ping");
 		return array;
 	}
 
 	@Override
-	public HashMap<String, String> polling() throws Exception {
+	public HashMap<String, String> polling() throws RemoteException {
 		// TODO Auto-generated method stub
+		HashMap<String,String> resultat = new HashMap<String, String>();
 
-		System.out.println("** Ping : " + host.getName() + " **");	
 		try {
 			InetAddress address = InetAddress.getByName(inputParams.get("[@ipTo]"));
-			System.out.println("Nom: " + address.getHostName());
-			System.out.println("Addrese: " + address.getHostAddress());
-			System.out.print("Ping: ");
-			if(address.isReachable(Integer.parseInt(inputParams.get("[@timeout]"))))
-				System.out.println("OK");
+			resultat.put("name", address.getHostName());
+			resultat.put("address", address.getHostAddress());
+
+			long start = System.currentTimeMillis();
+			if(address.isReachable(Integer.parseInt(inputParams.get("[@timeout]")))){
+				long end = System.currentTimeMillis();
+				resultat.put("ping", end-start+"ms");
+			}
 			else
-				System.out.println("Impossible");
-			System.out.println(address.getHostName());
+				resultat.put("ping", "impossible");
 		}
 		catch (UnknownHostException e) {
 			System.err.println("Impossible de résoudre l'hôte ");
@@ -55,7 +59,7 @@ public class Ping extends GlobalPlugin implements Plugin{
 			return null;
 		}
 
-		return null;
+		return resultat;
 	}
 
 }

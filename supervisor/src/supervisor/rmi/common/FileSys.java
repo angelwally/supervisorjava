@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
-public class FileSys extends GlobalPlugin implements Plugin {
+public class FileSys extends GlobalPlugin {
 
 	/**
 	 * 
@@ -25,22 +25,29 @@ public class FileSys extends GlobalPlugin implements Plugin {
 	}
 
 	@Override
-	public HashMap<String, String> polling() throws Exception {
+	public HashMap<String, String> polling() throws RemoteException {
 		Sigar sigar = new Sigar();			
 
-		FileSystem[] list = sigar.getFileSystemList();
-		System.out.println("** File System sur " + host.getName() + " **");	
-		for (FileSystem fs : list) {
-			System.out.println(fs.getDirName());
-			System.out.println(fs.getTypeName());
-			System.out.println(fs.getOptions());
-			/*try{
-				FileSystemUsage usage =	sigar.getFileSystemUsage(fs.getDirName());
-				System.out.println(usage);	
-			} catch (SigarException e){
-				System.out.println(e.getMessage());
-			}*/
+		FileSystem[] list;
+		try {
+			list = sigar.getFileSystemList();
+			System.out.println("** File System sur " + host.getName() + " **");	
+			for (FileSystem fs : list) {
+				System.out.println(fs.getDirName());
+				System.out.println(fs.getTypeName());
+				System.out.println(fs.getOptions());
+				/*try{
+					FileSystemUsage usage =	sigar.getFileSystemUsage(fs.getDirName());
+					System.out.println(usage);	
+				} catch (SigarException e){
+					System.out.println(e.getMessage());
+				}*/
+			}
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 
 		return null;
 	}

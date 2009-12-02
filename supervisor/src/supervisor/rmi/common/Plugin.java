@@ -10,7 +10,7 @@ public interface Plugin extends Serializable,Remote {
 	
 	ArrayList<String> getParamNameList() throws Exception;
 	void setParam(HashMap<String,String> lstParam) throws Exception;
-	HashMap<String,String> polling() throws Exception;
+	HashMap<String,String> polling() throws RemoteException;
 	String getName() throws RemoteException;
 }
 

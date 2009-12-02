@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
-public class Net extends GlobalPlugin implements Plugin {
+public class Net extends GlobalPlugin {
 
 	/**
 	 * 
@@ -23,14 +23,20 @@ public class Net extends GlobalPlugin implements Plugin {
 	}
 
 	@Override
-	public HashMap<String, String> polling() throws Exception {
+	public HashMap<String, String> polling() throws RemoteException {
 		
 		Sigar sigar = new Sigar();			
 		System.out.println("** Network sur " + host.getName() + " **");			
-		System.out.println(sigar.getTcp());
-		String[] ifList = sigar.getNetInterfaceList();
-		for (String intf : ifList)
-			System.out.println(intf + " : " + sigar.getNetInterfaceStat(intf));
+		try {
+			System.out.println(sigar.getTcp());
+			String[] ifList = sigar.getNetInterfaceList();
+			for (String intf : ifList)
+				System.out.println(intf + " : " + sigar.getNetInterfaceStat(intf));
+		} catch (SigarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		return null;
 	}

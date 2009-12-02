@@ -20,8 +20,7 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 	}
 
 	@Override
-	public HashMap<String,String> polling() throws Exception{
-		System.out.println("Polling...");
+	public HashMap<String, HashMap<String, String>> polling() throws RemoteException{
 		return host.polling();
 		
 	}
@@ -36,7 +35,7 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 		try{		
 			Registry r = LocateRegistry.getRegistry();
 			ProxyRemote proxy = new ProxyRemote();
-			r.bind("myserver", proxy);
+			r.bind("supervisor", proxy);
 			/*Naming.rebind("rmi://localhost:1099/test", proxy);*/
 			System.out.println("Serveur prêt");
 		}

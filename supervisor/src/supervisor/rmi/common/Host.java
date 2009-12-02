@@ -1,5 +1,6 @@
 package supervisor.rmi.common;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,11 +13,13 @@ public class Host implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String ip;
+	private int refresh = 2000;
 	private ArrayList<Plugin> plugins = new ArrayList<Plugin>();
 
-	public Host(String name,String ip){
+	public Host(String name,String ip,int refresh){
 		this.ip = ip;
 		this.name = name;
+		this.refresh = refresh;
 	}
 	
 	public String getIp(){
@@ -40,11 +43,12 @@ public class Host implements Serializable{
 		return null;
 	}*/
 	
-	public HashMap<String,String> polling() throws Exception{
+	public HashMap<String,HashMap<String,String>> polling() throws RemoteException{
+		HashMap<String,HashMap<String,String>> resultat = new HashMap<String, HashMap<String, String>>();
 		for(int i=0;i<plugins.size();i++){
 			Plugin plugin = plugins.get(i);
-			plugin.polling();
+			resultat.put(plugin.getName(),plugin.polling());
 		}
-		return null;
+		return resultat;
 	}
 }

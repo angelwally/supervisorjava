@@ -1,43 +1,38 @@
 package supervisor.rmi.client;
+import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
+import java.util.ArrayList;
+import supervisor.rmi.common.Host;
+import supervisor.rmi.common.Proxy;
 
 public class Supervisor {
 
+	private static ArrayList<Host> hosts;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Parameters parameters = Parameters.setParameters("config.xml");
+		hosts = Parameters.readXML("config.xml");
 		System.setSecurityManager(new RMISecurityManager());
-		
+
 		while(true){
-			/*System.out.print("#");
-			String cmd = lireString();
-			if(cmd.compareTo("")==0)
-				continue;
-			StringTokenizer tokenizer = new StringTokenizer(cmd, " ");
-			ArrayList<String> cmds = new ArrayList<String>();
-			int i = 0;
-
-			while ( tokenizer.hasMoreTokens() ) {
-				cmds.add(tokenizer.nextToken());
-				i++;
-			}
-
-			if(cmds.get(0).compareTo("exit")==0){
-				System.exit(0);
-			}
-			else if(cmds.get(0).compareTo("help")==0){
-				showHelp();
-			}
-			else{
-			 */
-			try {
-				parameters.polling();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(int i=0;i<hosts.size();i++){
+				try {
+					Host host = hosts.get(i);
+					Proxy proxy;
+					if(host.getName().compareTo("localhost")==0){
+						proxy = new ProxyLocal();			
+					}
+					else{
+						proxy = (Proxy)Naming.lookup("rmi://"+host.getIp()+":1099/supervisor");
+					}
+					proxy.addHost(host);
+					proxy.polling();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			try {
 				Thread.sleep(2000);
@@ -47,22 +42,8 @@ public class Supervisor {
 			}
 		}
 	}
+
+
 }
 
-/*public static String lireString(){//lecture d'une chaine
-		String ligne_lue=null;
-		try{
-			InputStreamReader lecteur=new InputStreamReader(System.in);
-			BufferedReader entree=new BufferedReader(lecteur);
-			ligne_lue=entree.readLine();
-		}
-		catch(IOException err){
-			System.exit(0);
-		}
-		return ligne_lue;
-	} 
-
-	public static void showHelp(){
-
-	}*/
 
