@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
-import org.hyperic.sigar.FileSystem;
 
 public class FileSys extends GlobalPlugin implements Plugin {
 
@@ -30,16 +29,17 @@ public class FileSys extends GlobalPlugin implements Plugin {
 		Sigar sigar = new Sigar();			
 
 		FileSystem[] list = sigar.getFileSystemList();
+		System.out.println("** File System sur " + host.getName() + " **");	
 		for (FileSystem fs : list) {
 			System.out.println(fs.getDirName());
 			System.out.println(fs.getTypeName());
 			System.out.println(fs.getOptions());
-			try{
+			/*try{
 				FileSystemUsage usage =	sigar.getFileSystemUsage(fs.getDirName());
 				System.out.println(usage);	
 			} catch (SigarException e){
 				System.out.println(e.getMessage());
-			}
+			}*/
 		}
 
 		return null;

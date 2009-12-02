@@ -21,6 +21,7 @@ public class ProxyRemote extends UnicastRemoteObject implements Proxy {
 
 	@Override
 	public HashMap<String,String> polling() throws Exception{
+		System.out.println("Polling...");
 		return host.polling();
 		
 	}

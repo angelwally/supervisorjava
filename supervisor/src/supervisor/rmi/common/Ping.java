@@ -31,6 +31,8 @@ public class Ping extends GlobalPlugin implements Plugin{
 	@Override
 	public HashMap<String, String> polling() throws Exception {
 		// TODO Auto-generated method stub
+
+		System.out.println("** Ping : " + host.getName() + " **");	
 		try {
 			InetAddress address = InetAddress.getByName(inputParams.get("[@ipTo]"));
 			System.out.println("Nom: " + address.getHostName());

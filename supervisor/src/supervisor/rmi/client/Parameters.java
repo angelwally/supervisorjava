@@ -14,6 +14,7 @@ import supervisor.rmi.common.Memory;
 import supervisor.rmi.common.Ping;
 import supervisor.rmi.common.Plugin;
 import supervisor.rmi.common.Proxy;
+import supervisor.rmi.common.Net;
 
 public class Parameters {
 
@@ -79,6 +80,8 @@ public class Parameters {
 			return new CPU(host);
 		else if(pluginName.equals("filesystem"))
 			return new FileSys(host);
+		else if(pluginName.equals("net"))
+			return new Net(host);
 		else
 			return null;
 	}
@@ -99,7 +102,11 @@ public class Parameters {
 			}
 			else{
 				try {
+
+					System.out.println("rmi://"+host.getIp()+":1099/myserver");
+
 					System.out.println("try to connect "+"rmi://"+host.getIp()+":1099/myserver");
+
 					Proxy proxy = (Proxy)Naming.lookup("rmi://"+host.getIp()+":1099/myserver");
 					proxy.addHost(host);
 					proxy.polling();
