@@ -42,7 +42,7 @@ public class ProxyRemote implements Proxy {
 		try {
 			this.host = host;
 			adapter = (AdapterInterface)Naming.lookup("rmi://"+host.getIp()+":1099/supervisor");
-			adapter.addHost(host);
+			adapter.addPlugins(host.getPlugins());
 			refresh = host.getRefresh();
 		} catch (MalformedURLException e){
 			// TODO Auto-generated catch block

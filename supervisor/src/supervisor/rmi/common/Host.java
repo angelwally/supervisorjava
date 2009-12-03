@@ -1,5 +1,4 @@
 package supervisor.rmi.common;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +6,7 @@ import java.util.HashMap;
 import supervisor.rmi.client.View;
 
 
-public class Host implements Serializable{
+public class Host{
 	
 	/**
 	 * 
@@ -31,6 +30,10 @@ public class Host implements Serializable{
 	
 	public String getName(){
 		return name;
+	}
+	
+	public ArrayList<Plugin> getPlugins(){
+		return plugins;
 	}
 	
 	public boolean addPlugin(Plugin plugin){

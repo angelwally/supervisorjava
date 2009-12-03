@@ -2,7 +2,7 @@
 	<host name="localhost" ip="127.0.0.1" refresh="2000">
 		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222">
 			<view type="stream" value="Ping : @ping"/>
-			<view type="conditional" condition="@ping > 45" value="houla"/>
+			<view type="conditional" condition="@ping > 45" value="caca"/>
 		</plugin>	
 		<plugin name="cpu" />
 		<plugin name="memory" />

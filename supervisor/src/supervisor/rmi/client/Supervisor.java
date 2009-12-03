@@ -1,5 +1,4 @@
 package supervisor.rmi.client;
-import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.util.ArrayList;
 import supervisor.rmi.common.Host;

@@ -4,26 +4,33 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import supervisor.rmi.common.AdapterInterface;
 import supervisor.rmi.common.Host;
+import supervisor.rmi.common.Plugin;
 
 public class Adapter extends UnicastRemoteObject implements AdapterInterface{
 
 	private static final long serialVersionUID = 1L;
-	private Host host;
+	private ArrayList<Plugin> plugins;
 
 	public Adapter() throws RemoteException{
 	}
 
 	public HashMap<String, HashMap<String, String>> polling() throws RemoteException{
-		return host.polling();
+		HashMap<String,HashMap<String,String>> resultat = new HashMap<String, HashMap<String, String>>();
+		for(int i=0;i<plugins.size();i++){
+			Plugin plugin = plugins.get(i);
+			resultat.put(plugin.getName(),plugin.polling());
+		}
+		return resultat;
 		
 	}
 
-	public void addHost(Host host) throws RemoteException{
-		this.host = host;
+	public void addPlugins(ArrayList<Plugin> plugins) throws RemoteException{
+		this.plugins = plugins;
 	}
 
 	public static void main(String[] args) {
