@@ -5,6 +5,7 @@
 			<view type="conditional" condition="@ping > 45" value="caca"/>
 		</plugin>	
 		<plugin name="cpu" />
+			<view type="stream" value="** CPU sur localhost *** CPU States : @user"/>
 		<plugin name="memory" />
 		<plugin name="filesystem" />
 		<plugin name="net" />

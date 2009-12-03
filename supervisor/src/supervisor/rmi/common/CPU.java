@@ -24,6 +24,9 @@ public class CPU extends GlobalPlugin {
 
 	@Override
 	public HashMap<String, String> polling() throws RemoteException {
+
+		HashMap<String,String> resultat = new HashMap<String, String>();
+		
 		try {
 			Sigar sigar = new Sigar();			
 
@@ -32,17 +35,27 @@ public class CPU extends GlobalPlugin {
 			cpuInfoList = sigar.getCpuInfoList();
 			for (CpuInfo cpuInfo : cpuInfoList) System.out.println(cpuInfo);
 
+			//System.out.println("** CPU sur " + host.getName() + " **");
 
-			System.out.println("** CPU sur " + host.getName() + " **");	
 			CpuPerc[] cpuPercList = sigar.getCpuPercList();
-			for (CpuPerc cpuPerc : cpuPercList) System.out.println(cpuPerc);
-			System.out.println("ProcStat;: " + sigar.getProcStat());
+			CpuPerc cpuPerc = cpuPercList[0];	
+			resultat.put("user",cpuPerc.getUser()+"");
+			resultat.put("system",cpuPerc.getSys()+"");
+			resultat.put("idle",cpuPerc.getIdle()+"");
+
+			
+			//System.out.println("ProcStat;: " + sigar.getProcStat());
+			ProcStat tempProcStat = sigar.getProcStat();
+			resultat.put("",tempProcStat.getIdle()+"");	
+			resultat.put("",tempProcStat.getSleeping()+"");
+			resultat.put("",tempProcStat.getRunning()+"");
+			resultat.put("",tempProcStat.getTotal()+"");
 		} catch (SigarException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 
-		return null;
+		return resultat;
 	}
 }
