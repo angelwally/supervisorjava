@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
+import supervisor.rmi.client.View;
+
 
 public abstract class GlobalPlugin  extends UnicastRemoteObject implements Serializable,Plugin{
 	
@@ -21,6 +23,10 @@ public abstract class GlobalPlugin  extends UnicastRemoteObject implements Seria
 	
 	public void setParam(HashMap<String,String> lstParam){
 		this.inputParams = lstParam;
+	}
+	
+	public void addView(View view){
+		
 	}
 	
 	public String getName(){

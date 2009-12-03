@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import supervisor.rmi.client.View;
+
 
 public interface Plugin extends Serializable,Remote {
 	

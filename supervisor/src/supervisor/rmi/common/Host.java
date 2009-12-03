@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import supervisor.rmi.client.View;
+
 
 public class Host implements Serializable{
 	
@@ -15,6 +17,7 @@ public class Host implements Serializable{
 	private String ip;
 	private int refresh = 2000;
 	private ArrayList<Plugin> plugins = new ArrayList<Plugin>();
+	private HashMap<String,ArrayList<View>> viewList = new HashMap<String, ArrayList<View>>();
 
 	public Host(String name,String ip,int refresh){
 		this.ip = ip;
@@ -54,5 +57,14 @@ public class Host implements Serializable{
 	
 	public int getRefresh(){
 		return refresh;
+	}
+
+	public void addViews(String pluginName, ArrayList<View> viewList) {
+		// TODO Auto-generated method stub
+		this.viewList.put(pluginName, viewList);
+	}
+	
+	public ArrayList<View> getViews(String pluginName){
+		return viewList.get(pluginName);
 	}
 }

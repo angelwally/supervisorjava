@@ -43,6 +43,23 @@ public class Parameters {
 						params.put(key, hc2.getString(key));
 					}
 					plugin.setParam(params);
+					List<HierarchicalConfiguration> fields3= hc2.configurationsAt("view");
+					ArrayList<View> viewList = new ArrayList<View>();
+					for (HierarchicalConfiguration hc3 : fields3){
+						String type = hc3.getString("[@type]");
+						View view;
+						if(type.equals("stream"))
+							view = new StreamView(hc3.getString("[@value]"));
+						else if(type.equals("conditional"))
+							view = new ConditionalView(hc3.getString("[@condition]"),hc3.getString("[@value]"));
+						else{
+							System.out.println("Erreur de configuration des vues !");
+							continue;
+						}
+						viewList.add(view);
+							
+					}
+					host.addViews(plugin.getName(),viewList);
 					host.addPlugin(plugin);
 
 				}

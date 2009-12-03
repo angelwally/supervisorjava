@@ -1,7 +1,9 @@
 package supervisor.rmi.client;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import supervisor.rmi.common.Host;
 
@@ -13,9 +15,21 @@ public class ProxyLocal implements Proxy {
 	public ProxyLocal(){
 	}
 
-	public HashMap<String,HashMap<String,String>> polling() throws RemoteException{
-		// TODO Auto-generated method stub
-		return host.polling();		
+	@Override
+	public void polling() throws RemoteException{
+		HashMap<String,HashMap<String,String>> hash = host.polling();
+		Iterator<String> it = hash.keySet().iterator();
+		while(it.hasNext()){
+			String key = it.next();
+			ArrayList<View> views = host.getViews(key);
+			for(int i =0;i<views.size();i++){
+				View view = views.get(i);
+				String msg = view.getMessage(hash.get(key));
+				if(!msg.equals(""))
+					System.out.println(msg);
+			}
+		}
+
 	}
 
 	@Override

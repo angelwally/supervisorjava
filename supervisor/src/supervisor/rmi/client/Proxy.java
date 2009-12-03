@@ -8,6 +8,6 @@ import supervisor.rmi.common.Host;
 
 public interface Proxy extends Runnable{
 	public void addHost(Host host) throws RemoteException;
-	public HashMap<String,HashMap<String,String>> polling() throws RemoteException;
+	public void polling() throws RemoteException;
 
 }

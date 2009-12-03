@@ -43,7 +43,7 @@ public class Ping extends GlobalPlugin{
 			long start = System.currentTimeMillis();
 			if(address.isReachable(Integer.parseInt(inputParams.get("[@timeout]")))){
 				long end = System.currentTimeMillis();
-				resultat.put("ping", end-start+"ms");
+				resultat.put("ping", end-start+"");
 			}
 			else
 				resultat.put("ping", "impossible");
