@@ -3,10 +3,9 @@ package supervisor.rmi.client;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class ConditionalView implements View{
+public class ConditionalView extends View{
 
 	String condition;
-	String message;
 
 	public ConditionalView(String condition,String message) {
 		// TODO Auto-generated constructor stub
@@ -22,7 +21,6 @@ public class ConditionalView implements View{
 		}
 		return "";
 		
-
 	}
 
 	public boolean isTrue(HashMap<String,String> hash){
@@ -72,22 +70,5 @@ public class ConditionalView implements View{
 		return false;
 	}
 	
-	public String replaceVar(HashMap<String,String> hash){
-		StringTokenizer token = new StringTokenizer(message);
-		String response="";
-		while(token.hasMoreTokens()){
-			String s = token.nextToken();
-			if(s.charAt(0)=='@'){
-				if(hash.containsKey(s.substring(1)))
-					response+=hash.get(s.substring(1));
-				else
-					response+="erreur";
-			}
-			else{
-				response+=s;
-			}
-		}
-		return response;
-	}
 
 }
