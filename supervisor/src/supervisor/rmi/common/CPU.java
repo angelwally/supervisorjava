@@ -46,10 +46,10 @@ public class CPU extends GlobalPlugin {
 			
 			//System.out.println("ProcStat;: " + sigar.getProcStat());
 			ProcStat tempProcStat = sigar.getProcStat();
-			resultat.put("",tempProcStat.getIdle()+"");	
-			resultat.put("",tempProcStat.getSleeping()+"");
-			resultat.put("",tempProcStat.getRunning()+"");
-			resultat.put("",tempProcStat.getTotal()+"");
+			resultat.put("procIdle",tempProcStat.getIdle()+"");	
+			resultat.put("procSleeping",tempProcStat.getSleeping()+"");
+			resultat.put("procRunning",tempProcStat.getRunning()+"");
+			resultat.put("procTotal",tempProcStat.getTotal()+"");
 		} catch (SigarException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

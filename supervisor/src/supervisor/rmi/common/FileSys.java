@@ -26,30 +26,40 @@ public class FileSys extends GlobalPlugin {
 
 	@Override
 	public HashMap<String, String> polling() throws RemoteException {
+		
 		Sigar sigar = new Sigar();			
-
+		HashMap<String,String> resultat = new HashMap<String, String>();
+		String tempString = "";
+		
 		FileSystem[] list;
 		try {
 			list = sigar.getFileSystemList();
-			System.out.println("** File System sur " + host.getName() + " **");	
+			int n = list.length;
+			int i = 0;
+			
+			/*for (int i=0; i<=n; i++) {
+				tempString = tempString + list[i].getDirName()+" " ;
+				//tempString = tempString + list[i].getTypeName()+" " ;
+				//if (i==n) tempString = tempString + list[i].getOptions()+" " ;
+				//else tempString = tempString + list[i].getOptions()+" " +"\n" ;				
+			}		*/		
+			
 			for (FileSystem fs : list) {
-				System.out.println(fs.getDirName());
-				System.out.println(fs.getTypeName());
-				System.out.println(fs.getOptions());
-				/*try{
-					FileSystemUsage usage =	sigar.getFileSystemUsage(fs.getDirName());
-					System.out.println(usage);	
-				} catch (SigarException e){
-					System.out.println(e.getMessage());
-				}*/
-			}
+				tempString = tempString + fs.getDirName()+" " ;
+				tempString = tempString + fs.getTypeName()+" " ;
+				if (i==n-1) tempString = tempString + list[i].getOptions()+" " ;
+				else tempString = tempString + list[i].getOptions()+" " +"\n" ;
+				i++;
+			}	
+			resultat.put("info",tempString);
+			
 		} catch (SigarException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 
-		return null;
+		return resultat;
 	}
 
 }

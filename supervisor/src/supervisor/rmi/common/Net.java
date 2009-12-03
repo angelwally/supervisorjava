@@ -24,14 +24,29 @@ public class Net extends GlobalPlugin {
 
 	@Override
 	public HashMap<String, String> polling() throws RemoteException {
+	
+		HashMap<String,String> resultat = new HashMap<String, String>();
+		String tempString = "";
+
 		
 		Sigar sigar = new Sigar();			
 		System.out.println("** Network sur " + host.getName() + " **");			
 		try {
-			System.out.println(sigar.getTcp());
-			String[] ifList = sigar.getNetInterfaceList();
-			for (String intf : ifList)
-				System.out.println(intf + " : " + sigar.getNetInterfaceStat(intf));
+			
+			String[] ifList = sigar.getNetInterfaceList();		
+			int n = ifList.length;
+			int i = 0;
+			
+			for (String intf : ifList){
+				tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" " ;
+				if (i==n-1) tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" " ;
+				else tempString = tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" "  +"\n" ;
+				i++;
+
+			}		
+			System.out.println(tempString);
+			resultat.put("info",tempString);
+			
 		} catch (SigarException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
