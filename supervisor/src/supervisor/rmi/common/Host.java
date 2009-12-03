@@ -51,4 +51,8 @@ public class Host implements Serializable{
 		}
 		return resultat;
 	}
+	
+	public int getRefresh(){
+		return refresh;
+	}
 }
