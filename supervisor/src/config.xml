@@ -3,12 +3,13 @@
 		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222">
 			<view type="stream" value="** PING sur localhost ***"/>
 			<view type="stream" value="Ping : @ping"/>
-			<view type="conditional" condition="@ping > 45" value="caca"/>
+			<view type="conditional" condition="@ping > 1000" value="Ping trop élevé !"/>
 		</plugin>	
 		<plugin name="cpu" >
 			<view type="stream" value="** CPU sur localhost ***"/>
 			<view type="stream" value="CpuStat : user: @user --- system : @system --- idle : @idle"/>
 			<view type="stream" value="ProcStat: idle: @procIdle --- sleeping : @procSleeping --- running : @procRunning --- total : @procTotal "/>
+			<view type="conditional" condition="@procIdle > 1 and @idle > 0" value="condtion ok!!!!!!!!!!!!"/>
 		</plugin>	
 		<plugin name="memory" >
 			<view type="stream" value="** Memory sur localhost ***"/>	

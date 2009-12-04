@@ -9,8 +9,8 @@ public abstract class View {
 	
 	String message;
 	
-	public String replaceVar(HashMap<String,String> hash){
-		StringTokenizer token = new StringTokenizer(message);
+	public String replaceVar(HashMap<String,String> hash,String string){
+		StringTokenizer token = new StringTokenizer(string);
 		String response="";
 		while(token.hasMoreTokens()){
 			String s = token.nextToken();
@@ -18,8 +18,12 @@ public abstract class View {
 				if(hash.containsKey(s.substring(1)))
 					response+=hash.get(s.substring(1))+ " ";
 				else
-					response+="erreur";
+					response+="erreur ";
 			}
+			else if(s.equals("and"))
+				response+="&& ";
+			else if(s.equals("or"))
+				response+="|| ";
 			else{
 				response+=s+" ";
 			}

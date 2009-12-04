@@ -53,6 +53,6 @@ public class Net extends GlobalPlugin {
 		}
 		
 		
-		return null;
+		return resultat;
 	}
 }

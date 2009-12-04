@@ -12,7 +12,7 @@ public class StreamView extends View {
 	@Override
 	public String getMessage(HashMap<String, String> hash) {
 		// TODO Auto-generated method stub
-		return replaceVar(hash);
+		return replaceVar(hash,message);
 	}
 	
 }

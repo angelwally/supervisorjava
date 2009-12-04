@@ -3,6 +3,10 @@ package supervisor.rmi.client;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public class ConditionalView extends View{
 
 	String condition;
@@ -17,55 +21,22 @@ public class ConditionalView extends View{
 	public String getMessage(HashMap<String,String> hash) {
 		// TODO Auto-generated method stub
 		if(isTrue(hash)){
-			return replaceVar(hash);
+			return replaceVar(hash,message);
 		}
 		return "";
 		
 	}
 
 	public boolean isTrue(HashMap<String,String> hash){
-		StringTokenizer token = new StringTokenizer(condition);
-		int valueOfData = 0;
-		int operator = 0;
-		boolean result = false;
-		int i=0;
-		while(token.hasMoreTokens()){
-			String s = token.nextToken();
-			switch(i){
-			case 0:
-				if(hash.containsKey(s.substring(1))&&i==0){
-					valueOfData = Integer.parseInt(hash.get(s.substring(1)));				
-				}
-				else
-					return false;
-				break;
-			case 1:
-				if(s.equals(">"))
-					operator = 0;
-				else if(s.equals("<"))
-					operator = 1;
-				else if(s.equals("=="))
-					operator = 2;
-				else
-					return false;
-				break;
-			case 2:
-				int value = Integer.parseInt(s);
-				switch(operator){
-				case 0:
-					result = valueOfData>value;
-					break;
-				case 1:
-					result = valueOfData<value;
-					break;
-				case 2:
-					result = valueOfData==value;
-					break;
-				}
-				return result;
-					
-			}
-			i++;
+		String s = replaceVar(hash,condition);
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByMimeType("text/javascript");
+		try {
+			boolean result = (Boolean) engine.eval(s);
+			return result;
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 	}

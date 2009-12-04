@@ -39,9 +39,9 @@ public class CPU extends GlobalPlugin {
 
 			CpuPerc[] cpuPercList = sigar.getCpuPercList();
 			CpuPerc cpuPerc = cpuPercList[0];	
-			resultat.put("user",cpuPerc.getUser()+"");
-			resultat.put("system",cpuPerc.getSys()+"");
-			resultat.put("idle",cpuPerc.getIdle()+"");
+			resultat.put("user",cpuPerc.getUser()*100+"");
+			resultat.put("system",cpuPerc.getSys()*100+"");
+			resultat.put("idle",cpuPerc.getIdle()*100+"");
 
 			
 			//System.out.println("ProcStat;: " + sigar.getProcStat());
