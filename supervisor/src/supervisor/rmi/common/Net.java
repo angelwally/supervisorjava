@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
+import supervisor.rmi.client.Host;
+
 public class Net extends GlobalPlugin {
 
 	/**
@@ -27,10 +29,9 @@ public class Net extends GlobalPlugin {
 	
 		HashMap<String,String> resultat = new HashMap<String, String>();
 		String tempString = "";
-
 		
 		Sigar sigar = new Sigar();			
-		System.out.println("** Network sur " + host.getName() + " **");			
+		
 		try {
 			
 			String[] ifList = sigar.getNetInterfaceList();		
@@ -38,13 +39,16 @@ public class Net extends GlobalPlugin {
 			int i = 0;
 			
 			for (String intf : ifList){
+				NetInterfaceStat stat = sigar.getNetInterfaceStat(intf);
+				resultat.put(intf, stat.toString());
+				resultat.put(intf+"_txErrors", stat.getTxErrors()+"");
+				resultat.put(intf+"_rxErrors", stat.getRxErrors()+"");
 				tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" " ;
 				if (i==n-1) tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" " ;
-				else tempString = tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" "  +"\n" ;
+				else tempString = tempString + intf + " : " + sigar.getNetInterfaceStat(intf)+" "  +"\n" ;
 				i++;
 
 			}		
-			System.out.println(tempString);
 			resultat.put("info",tempString);
 			
 		} catch (SigarException e) {

@@ -1,6 +1,5 @@
 package supervisor.rmi.client;
 import java.rmi.RemoteException;
-import supervisor.rmi.common.Host;
 
 
 public interface Proxy extends Runnable{

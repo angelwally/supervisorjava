@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.rmi.*;
 
 import supervisor.rmi.common.AdapterInterface;
-import supervisor.rmi.common.Host;
 
 public class ProxyRemote implements Proxy {
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import supervisor.rmi.common.AdapterInterface;
-import supervisor.rmi.common.Host;
 import supervisor.rmi.common.Plugin;
 
 public class Adapter extends UnicastRemoteObject implements AdapterInterface{

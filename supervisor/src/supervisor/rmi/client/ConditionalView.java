@@ -1,7 +1,6 @@
 package supervisor.rmi.client;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -10,11 +9,17 @@ import javax.script.ScriptException;
 public class ConditionalView extends View{
 
 	String condition;
+	String messageFalse = "";
 
 	public ConditionalView(String condition,String message) {
 		// TODO Auto-generated constructor stub
 		this.condition = condition;
 		this.message = message;
+	}
+	
+	public ConditionalView(String condition,String messageTrue,String messageFalse){
+		this(condition,messageTrue);
+		this.messageFalse = messageFalse;
 	}
 
 	@Override
@@ -23,7 +28,8 @@ public class ConditionalView extends View{
 		if(isTrue(hash)){
 			return replaceVar(hash,message);
 		}
-		return "";
+		else
+			return replaceVar(hash,messageFalse);
 		
 	}
 

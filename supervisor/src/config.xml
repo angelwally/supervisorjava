@@ -1,15 +1,13 @@
 <config>
-	<host name="localhost" ip="127.0.0.1" refresh="2000">
+	<host name="localhost" ip="127.0.0.1" refresh="6000">
 		<plugin name="ping" timeout = "2000" ipTo="10.2.0.222">
 			<view type="stream" value="** PING sur localhost ***"/>
-			<view type="stream" value="Ping : @ping"/>
-			<view type="conditional" condition="@ping > 1000" value="Ping trop élevé !"/>
+			<view type="conditional" condition="@reachable == 1" value="Ping : @ping ms" else="Ping impossible!"/>
 		</plugin>	
 		<plugin name="cpu" >
 			<view type="stream" value="** CPU sur localhost ***"/>
-			<view type="stream" value="CpuStat : user: @user --- system : @system --- idle : @idle"/>
+			<view type="stream" value="CpuStat : user: @cpu0_user --- system : @cpu0_system --- idle : @cpu0_idle"/>
 			<view type="stream" value="ProcStat: idle: @procIdle --- sleeping : @procSleeping --- running : @procRunning --- total : @procTotal "/>
-			<view type="conditional" condition="@procIdle > 1 and @idle > 0" value="condtion ok!!!!!!!!!!!!"/>
 		</plugin>	
 		<plugin name="memory" >
 			<view type="stream" value="** Memory sur localhost ***"/>	
@@ -22,13 +20,20 @@
 		</plugin>
 		<plugin name="net" >
 			<view type="stream" value="** Network sur localhost ***"/>	
-			<view type="stream" value="@info"  />			
+			<view type="stream" value="@info" />			
+		</plugin>
+		<plugin name="telnet" ipTo="smtp.rez-rennes.supelec.fr" timeout="1000">
+			<view type="conditional" condition="@reachable == 1" value="Telnet dispo en @ping" else="Telnet indisponible !"/>
 		</plugin>
 	</host>
 	
 	<host name="norace" ip="10.2.0.165" refresh="2000">
 		<plugin name="ping" timeout="2000"  ipTo="10.2.0.222"/>
-		<plugin name="cpu" />
+		<plugin name="cpu">
+		<view type="stream" value="** CPU sur norace ***"/>
+			<view type="stream" value="CpuStat : user: @cpu0_user --- system : @cpu0_system --- idle : @cpu0_idle"/>
+			<view type="stream" value="ProcStat: idle: @procIdle --- sleeping : @procSleeping --- running : @procRunning --- total : @procTotal "/>
+		</plugin>
 		<plugin name="memory" />
 		<plugin name="filesystem" />
 		<plugin name="telnet" ipTo="smtp.rez-rennes.supelec.fr" timeout="1000"/>

@@ -8,13 +8,18 @@ import java.util.HashMap;
 
 import org.apache.commons.net.telnet.TelnetClient;
 
+import supervisor.rmi.client.Host;
+
 public class Telnet extends GlobalPlugin {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Telnet(Host host) throws RemoteException {
 		super(host);
 		this.name = "telnet";
-		this.inputParams.put("[@ipTo]","localhost");
-		this.inputParams.put("[@timeout]", "1000");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,12 +41,13 @@ public class Telnet extends GlobalPlugin {
 			long end = System.currentTimeMillis();
 			telnet.disconnect();
 			resultat.put("ping", end-start+"ms");
+			resultat.put("reachable", "1");
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
-			resultat.put("ping","échec");
+			resultat.put("reachable", "0");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			resultat.put("ping","échec");
+			resultat.put("reachable", "0");
 		}
 		catch(Exception e){
 			System.out.println("Erreur de configuration !");

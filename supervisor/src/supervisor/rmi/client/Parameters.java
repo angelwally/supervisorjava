@@ -6,7 +6,6 @@ import org.apache.commons.configuration.*;
 
 import supervisor.rmi.common.CPU;
 import supervisor.rmi.common.FileSys;
-import supervisor.rmi.common.Host;
 import supervisor.rmi.common.Memory;
 import supervisor.rmi.common.Ping;
 import supervisor.rmi.common.Plugin;
@@ -50,8 +49,12 @@ public class Parameters {
 						View view;
 						if(type.equals("stream"))
 							view = new StreamView(hc3.getString("[@value]"));
-						else if(type.equals("conditional"))
-							view = new ConditionalView(hc3.getString("[@condition]"),hc3.getString("[@value]"));
+						else if(type.equals("conditional")){
+							if(hc3.containsKey("[@else]"))
+								view = new ConditionalView(hc3.getString("[@condition]"),hc3.getString("[@value]"),hc3.getString("[@else]"));
+							else
+								view = new ConditionalView(hc3.getString("[@condition]"),hc3.getString("[@value]"));
+						}
 						else{
 							System.out.println("Erreur de configuration des vues !");
 							continue;

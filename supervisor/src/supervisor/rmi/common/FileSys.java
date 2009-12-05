@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
+import supervisor.rmi.client.Host;
+
 public class FileSys extends GlobalPlugin {
 
 	/**
@@ -35,21 +37,14 @@ public class FileSys extends GlobalPlugin {
 		try {
 			list = sigar.getFileSystemList();
 			int n = list.length;
-			int i = 0;
 			
-			/*for (int i=0; i<=n; i++) {
-				tempString = tempString + list[i].getDirName()+" " ;
-				//tempString = tempString + list[i].getTypeName()+" " ;
-				//if (i==n) tempString = tempString + list[i].getOptions()+" " ;
-				//else tempString = tempString + list[i].getOptions()+" " +"\n" ;				
-			}		*/		
-			
-			for (FileSystem fs : list) {
+			for (int i=0;i<list.length;i++) {
+				FileSystem fs = list[i];
 				tempString = tempString + fs.getDirName()+" " ;
 				tempString = tempString + fs.getTypeName()+" " ;
+
 				if (i==n-1) tempString = tempString + list[i].getOptions()+" " ;
 				else tempString = tempString + list[i].getOptions()+" " +"\n" ;
-				i++;
 			}	
 			resultat.put("info",tempString);
 			

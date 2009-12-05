@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_3ytRoODJEd6vdq6BcZhzQA">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRoeDJEd6vdq6BcZhzQA" name="boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRouDJEd6vdq6BcZhzQA" name="byte"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRo-DJEd6vdq6BcZhzQA" name="char"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRpODJEd6vdq6BcZhzQA" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRpeDJEd6vdq6BcZhzQA" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRpuDJEd6vdq6BcZhzQA" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRp-DJEd6vdq6BcZhzQA" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_3ytRqODJEd6vdq6BcZhzQA" name="short"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_3ytRqeDJEd6vdq6BcZhzQA" name="supervisor">
+    <packagedElement xmi:type="uml:Package" xmi:id="_3ytRquDJEd6vdq6BcZhzQA" name="rmi">
+      <packagedElement xmi:type="uml:Package" xmi:id="_3ytRq-DJEd6vdq6BcZhzQA" name="client">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytRrODJEd6vdq6BcZhzQA" name="ProxyLocal" clientDependency="_3ytRruDJEd6vdq6BcZhzQA">
+          <ownedAttribute xmi:id="_3ytRreDJEd6vdq6BcZhzQA" name="host" visibility="private" type="_3ytSFODJEd6vdq6BcZhzQA" association="_3ytR5-DJEd6vdq6BcZhzQA"/>
+          <interfaceRealization xmi:id="_3ytRruDJEd6vdq6BcZhzQA" name="Proxy" supplier="_3ytRxODJEd6vdq6BcZhzQA" client="_3ytRrODJEd6vdq6BcZhzQA" contract="_3ytRxODJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytRr-DJEd6vdq6BcZhzQA" name="polling" visibility="public"/>
+          <ownedOperation xmi:id="_3ytRsODJEd6vdq6BcZhzQA" name="addHost" visibility="public">
+            <ownedParameter xmi:id="_3ytRseDJEd6vdq6BcZhzQA" name="host" type="_3ytSFODJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytRsuDJEd6vdq6BcZhzQA" name="run" visibility="public"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytRs-DJEd6vdq6BcZhzQA" name="View">
+          <ownedAttribute xmi:id="_3ytRtODJEd6vdq6BcZhzQA" name="message" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytRteDJEd6vdq6BcZhzQA" name="getMessage" isAbstract="true">
+            <ownedParameter xmi:id="_3ytRtuDJEd6vdq6BcZhzQA" name="hash" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRt-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytRuODJEd6vdq6BcZhzQA" name="replaceVar" visibility="public">
+            <ownedParameter xmi:id="_3ytRueDJEd6vdq6BcZhzQA" name="hash" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRuuDJEd6vdq6BcZhzQA" name="string" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRu-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytRvODJEd6vdq6BcZhzQA" name="Parameters">
+          <ownedOperation xmi:id="_3ytRveDJEd6vdq6BcZhzQA" name="readXML" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_3ytRvuDJEd6vdq6BcZhzQA" name="file" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRv-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytRwODJEd6vdq6BcZhzQA" name="getPlugin" visibility="private" isStatic="true">
+            <ownedParameter xmi:id="_3ytRweDJEd6vdq6BcZhzQA" name="pluginName" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRwuDJEd6vdq6BcZhzQA" name="host" type="_3ytSFODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRw-DJEd6vdq6BcZhzQA" name="return" type="_3ytSNeDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3ytRxODJEd6vdq6BcZhzQA" name="Proxy">
+          <ownedOperation xmi:id="_3ytRxeDJEd6vdq6BcZhzQA" name="addHost" visibility="public">
+            <ownedParameter xmi:id="_3ytRxuDJEd6vdq6BcZhzQA" name="host" type="_3ytSFODJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytRx-DJEd6vdq6BcZhzQA" name="polling" visibility="public"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytRyODJEd6vdq6BcZhzQA" name="StreamView">
+          <generalization xmi:id="_3ytRyeDJEd6vdq6BcZhzQA" general="_3ytRs-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytRyuDJEd6vdq6BcZhzQA" name="getMessage" visibility="public">
+            <ownedParameter xmi:id="_3ytRy-DJEd6vdq6BcZhzQA" name="hash" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytRzODJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytRzeDJEd6vdq6BcZhzQA" name="ProxyRemote" clientDependency="_3ytR0uDJEd6vdq6BcZhzQA">
+          <ownedAttribute xmi:id="_3ytRzuDJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytRz-DJEd6vdq6BcZhzQA" name="adapter" visibility="private" type="_3ytSAuDJEd6vdq6BcZhzQA" association="_3ytR6eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR0ODJEd6vdq6BcZhzQA" name="refresh" visibility="private" type="_3ytRpuDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR0eDJEd6vdq6BcZhzQA" name="host" visibility="private" type="_3ytSFODJEd6vdq6BcZhzQA" association="_3ytR6-DJEd6vdq6BcZhzQA"/>
+          <interfaceRealization xmi:id="_3ytR0uDJEd6vdq6BcZhzQA" name="Proxy" supplier="_3ytRxODJEd6vdq6BcZhzQA" client="_3ytRzeDJEd6vdq6BcZhzQA" contract="_3ytRxODJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytR0-DJEd6vdq6BcZhzQA" name="polling" visibility="public"/>
+          <ownedOperation xmi:id="_3ytR1ODJEd6vdq6BcZhzQA" name="addHost" visibility="public">
+            <ownedParameter xmi:id="_3ytR1eDJEd6vdq6BcZhzQA" name="host" type="_3ytSFODJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytR1uDJEd6vdq6BcZhzQA" name="run" visibility="public"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytR1-DJEd6vdq6BcZhzQA" name="Supervisor">
+          <ownedAttribute xmi:id="_3ytR2ODJEd6vdq6BcZhzQA" name="hosts" visibility="private" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytR2eDJEd6vdq6BcZhzQA" name="main" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_3ytR2uDJEd6vdq6BcZhzQA" name="args" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytR2-DJEd6vdq6BcZhzQA" name="ConditionalView">
+          <generalization xmi:id="_3ytR3ODJEd6vdq6BcZhzQA" general="_3ytRs-DJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR3eDJEd6vdq6BcZhzQA" name="condition" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytR3uDJEd6vdq6BcZhzQA" name="getMessage" visibility="public">
+            <ownedParameter xmi:id="_3ytR3-DJEd6vdq6BcZhzQA" name="hash" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytR4ODJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytR4eDJEd6vdq6BcZhzQA" name="isTrue" visibility="public">
+            <ownedParameter xmi:id="_3ytR4uDJEd6vdq6BcZhzQA" name="hash" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytR4-DJEd6vdq6BcZhzQA" name="return" type="_3ytRoeDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_3ytR5ODJEd6vdq6BcZhzQA" name="String"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_3ytR5eDJEd6vdq6BcZhzQA" name="HashMap"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_3ytR5uDJEd6vdq6BcZhzQA" name="ArrayList"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_3ytR5-DJEd6vdq6BcZhzQA" memberEnd="_3ytRreDJEd6vdq6BcZhzQA _3ytR6ODJEd6vdq6BcZhzQA">
+          <ownedEnd xmi:id="_3ytR6ODJEd6vdq6BcZhzQA" name="target" type="_3ytRrODJEd6vdq6BcZhzQA" association="_3ytR5-DJEd6vdq6BcZhzQA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_3ytR6eDJEd6vdq6BcZhzQA" memberEnd="_3ytRz-DJEd6vdq6BcZhzQA _3ytR6uDJEd6vdq6BcZhzQA">
+          <ownedEnd xmi:id="_3ytR6uDJEd6vdq6BcZhzQA" name="target" type="_3ytRzeDJEd6vdq6BcZhzQA" association="_3ytR6eDJEd6vdq6BcZhzQA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_3ytR6-DJEd6vdq6BcZhzQA" memberEnd="_3ytR0eDJEd6vdq6BcZhzQA _3ytR7ODJEd6vdq6BcZhzQA">
+          <ownedEnd xmi:id="_3ytR7ODJEd6vdq6BcZhzQA" name="target" type="_3ytRzeDJEd6vdq6BcZhzQA" association="_3ytR6-DJEd6vdq6BcZhzQA"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_3ytR7eDJEd6vdq6BcZhzQA" name="common">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytR7uDJEd6vdq6BcZhzQA" name="CPU">
+          <generalization xmi:id="_3ytR7-DJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR8ODJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytR8eDJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytR8uDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytR8-DJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytR9ODJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytR9eDJEd6vdq6BcZhzQA" name="GlobalPlugin" clientDependency="_3ytR--DJEd6vdq6BcZhzQA">
+          <generalization xmi:id="_3ytR9uDJEd6vdq6BcZhzQA" general="_3ytSTODJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR9-DJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR-ODJEd6vdq6BcZhzQA" name="name" visibility="protected" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR-eDJEd6vdq6BcZhzQA" name="inputParams" visibility="protected" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytR-uDJEd6vdq6BcZhzQA" name="host" visibility="protected" type="_3ytSFODJEd6vdq6BcZhzQA" association="_3ytSTeDJEd6vdq6BcZhzQA"/>
+          <interfaceRealization xmi:id="_3ytR--DJEd6vdq6BcZhzQA" name="Plugin" supplier="_3ytSNeDJEd6vdq6BcZhzQA" client="_3ytR9eDJEd6vdq6BcZhzQA" contract="_3ytSNeDJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytR_ODJEd6vdq6BcZhzQA" name="setParam" visibility="public">
+            <ownedParameter xmi:id="_3ytR_eDJEd6vdq6BcZhzQA" name="lstParam" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytR_uDJEd6vdq6BcZhzQA" name="addView" visibility="public">
+            <ownedParameter xmi:id="_3ytR_-DJEd6vdq6BcZhzQA" name="view" type="_3ytRs-DJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSAODJEd6vdq6BcZhzQA" name="getName" visibility="public">
+            <ownedParameter xmi:id="_3ytSAeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3ytSAuDJEd6vdq6BcZhzQA" name="AdapterInterface">
+          <ownedOperation xmi:id="_3ytSA-DJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSBODJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSBeDJEd6vdq6BcZhzQA" name="addPlugins" visibility="public">
+            <ownedParameter xmi:id="_3ytSBuDJEd6vdq6BcZhzQA" name="plugins" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSB-DJEd6vdq6BcZhzQA" name="Telnet">
+          <generalization xmi:id="_3ytSCODJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSCeDJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytSCuDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSC-DJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSDODJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSDeDJEd6vdq6BcZhzQA" name="Net">
+          <generalization xmi:id="_3ytSDuDJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSD-DJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSEODJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytSEeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSEuDJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSE-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSFODJEd6vdq6BcZhzQA" name="Host">
+          <ownedAttribute xmi:id="_3ytSFeDJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSFuDJEd6vdq6BcZhzQA" name="name" visibility="private" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSF-DJEd6vdq6BcZhzQA" name="ip" visibility="private" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSGODJEd6vdq6BcZhzQA" name="refresh" visibility="private" type="_3ytRpuDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSGeDJEd6vdq6BcZhzQA" name="plugins" visibility="private" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSGuDJEd6vdq6BcZhzQA" name="viewList" visibility="private" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSG-DJEd6vdq6BcZhzQA" name="getIp" visibility="public">
+            <ownedParameter xmi:id="_3ytSHODJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSHeDJEd6vdq6BcZhzQA" name="getName" visibility="public">
+            <ownedParameter xmi:id="_3ytSHuDJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSH-DJEd6vdq6BcZhzQA" name="getPlugins" visibility="public">
+            <ownedParameter xmi:id="_3ytSIODJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSIeDJEd6vdq6BcZhzQA" name="addPlugin" visibility="public">
+            <ownedParameter xmi:id="_3ytSIuDJEd6vdq6BcZhzQA" name="plugin" type="_3ytSNeDJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytSI-DJEd6vdq6BcZhzQA" name="return" type="_3ytRoeDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSJODJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSJeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSJuDJEd6vdq6BcZhzQA" name="getRefresh" visibility="public">
+            <ownedParameter xmi:id="_3ytSJ-DJEd6vdq6BcZhzQA" name="return" type="_3ytRpuDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSKODJEd6vdq6BcZhzQA" name="addViews" visibility="public">
+            <ownedParameter xmi:id="_3ytSKeDJEd6vdq6BcZhzQA" name="pluginName" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytSKuDJEd6vdq6BcZhzQA" name="viewList" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSK-DJEd6vdq6BcZhzQA" name="getViews" visibility="public">
+            <ownedParameter xmi:id="_3ytSLODJEd6vdq6BcZhzQA" name="pluginName" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+            <ownedParameter xmi:id="_3ytSLeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSLuDJEd6vdq6BcZhzQA" name="Ping">
+          <generalization xmi:id="_3ytSL-DJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSMODJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSMeDJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytSMuDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSM-DJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSNODJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_3ytSNeDJEd6vdq6BcZhzQA" name="Plugin">
+          <ownedOperation xmi:id="_3ytSNuDJEd6vdq6BcZhzQA" name="getParamNameList">
+            <ownedParameter xmi:id="_3ytSN-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSOODJEd6vdq6BcZhzQA" name="setParam">
+            <ownedParameter xmi:id="_3ytSOeDJEd6vdq6BcZhzQA" name="lstParam" type="_3ytR5eDJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSOuDJEd6vdq6BcZhzQA" name="polling">
+            <ownedParameter xmi:id="_3ytSO-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSPODJEd6vdq6BcZhzQA" name="getName">
+            <ownedParameter xmi:id="_3ytSPeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5ODJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSPuDJEd6vdq6BcZhzQA" name="Memory">
+          <generalization xmi:id="_3ytSP-DJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSQODJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSQeDJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytSQuDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSQ-DJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSRODJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSReDJEd6vdq6BcZhzQA" name="FileSys">
+          <generalization xmi:id="_3ytSRuDJEd6vdq6BcZhzQA" general="_3ytR9eDJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSR-DJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSSODJEd6vdq6BcZhzQA" name="getParamNameList" visibility="public">
+            <ownedParameter xmi:id="_3ytSSeDJEd6vdq6BcZhzQA" name="return" type="_3ytR5uDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSSuDJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSS-DJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_3ytSTODJEd6vdq6BcZhzQA" name="UnicastRemoteObject"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_3ytSTeDJEd6vdq6BcZhzQA" memberEnd="_3ytR-uDJEd6vdq6BcZhzQA _3ytSTuDJEd6vdq6BcZhzQA">
+          <ownedEnd xmi:id="_3ytSTuDJEd6vdq6BcZhzQA" name="target" type="_3ytR9eDJEd6vdq6BcZhzQA" association="_3ytSTeDJEd6vdq6BcZhzQA"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_3ytST-DJEd6vdq6BcZhzQA" name="server">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3ytSUODJEd6vdq6BcZhzQA" name="Adapter" clientDependency="_3ytSVODJEd6vdq6BcZhzQA">
+          <generalization xmi:id="_3ytSUeDJEd6vdq6BcZhzQA" general="_3ytSTODJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSUuDJEd6vdq6BcZhzQA" name="serialVersionUID" visibility="private" type="_3ytRp-DJEd6vdq6BcZhzQA"/>
+          <ownedAttribute xmi:id="_3ytSU-DJEd6vdq6BcZhzQA" name="plugins" visibility="private" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          <interfaceRealization xmi:id="_3ytSVODJEd6vdq6BcZhzQA" name="AdapterInterface" supplier="_3ytSAuDJEd6vdq6BcZhzQA" client="_3ytSUODJEd6vdq6BcZhzQA" contract="_3ytSAuDJEd6vdq6BcZhzQA"/>
+          <ownedOperation xmi:id="_3ytSVeDJEd6vdq6BcZhzQA" name="polling" visibility="public">
+            <ownedParameter xmi:id="_3ytSVuDJEd6vdq6BcZhzQA" name="return" type="_3ytR5eDJEd6vdq6BcZhzQA" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSV-DJEd6vdq6BcZhzQA" name="addPlugins" visibility="public">
+            <ownedParameter xmi:id="_3ytSWODJEd6vdq6BcZhzQA" name="plugins" type="_3ytR5uDJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_3ytSWeDJEd6vdq6BcZhzQA" name="main" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_3ytSWuDJEd6vdq6BcZhzQA" name="args" type="_3ytR5ODJEd6vdq6BcZhzQA"/>
+          </ownedOperation>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

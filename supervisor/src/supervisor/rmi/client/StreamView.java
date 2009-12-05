@@ -1,7 +1,6 @@
 package supervisor.rmi.client;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 public class StreamView extends View {
 

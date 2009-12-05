@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
+import supervisor.rmi.client.Host;
+
 public class Memory extends GlobalPlugin{
 
 	/**
@@ -14,7 +16,6 @@ public class Memory extends GlobalPlugin{
 	public Memory(Host host) throws RemoteException{
 		super(host);
 		this.name = "memory";
-		//params.put("[@timeout]", "1000");
 	}
 
 	@Override
@@ -29,15 +30,24 @@ public class Memory extends GlobalPlugin{
 		Sigar sigar = new Sigar();			
 		HashMap<String,String> resultat = new HashMap<String, String>();
 		
-		Mem mem;
+		
 		try {
+			Mem mem;
 			mem = sigar.getMem();
-			double memPourcent = mem.getFreePercent();
-			double memPourcent2 = Math.floor(memPourcent*100)/100;
+			double memFreePercent = Math.floor(mem.getFreePercent()*100)/100;
+			double memUsedPercent = Math.floor(mem.getUsedPercent()*100)/100;
+			resultat.put("memFreePercent",memFreePercent+"");
+			resultat.put("memFree", mem.getFree()+"");
+			resultat.put("memUsedPercent", memUsedPercent+"");
+			resultat.put("memUsed", mem.getUsed()+"");
+			resultat.put("memTotal", mem.getTotal()+"");
 
-			resultat.put("mem",sigar.getMem()+"");
-			resultat.put("memFree", memPourcent2+"");
-			resultat.put("swap", sigar.getSwap()+"");		
+			resultat.put("mem",mem+"");
+			Swap swap = sigar.getSwap();
+			resultat.put("swap", swap+"");	
+			resultat.put("swapFree", swap.getFree()+"");
+			resultat.put("swapUsed", swap.getUsed()+"");
+			resultat.put("swapTotal",swap.getTotal()+"");
 			
 		} catch (SigarException e) {
 			// TODO Auto-generated catch block

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.hyperic.sigar.*;
 
+import supervisor.rmi.client.Host;
+
 public class CPU extends GlobalPlugin {
 
 	/**
@@ -30,24 +32,34 @@ public class CPU extends GlobalPlugin {
 		try {
 			Sigar sigar = new Sigar();			
 
-			CpuInfo[] cpuInfoList;
-
-			cpuInfoList = sigar.getCpuInfoList();
-			for (CpuInfo cpuInfo : cpuInfoList) System.out.println(cpuInfo);
+			CpuInfo[] cpuInfoList = sigar.getCpuInfoList();
+			
+			for (int i=0;i<cpuInfoList.length;i++){
+				CpuInfo cpuInfo = cpuInfoList[i];
+				resultat.put("cpu"+i,cpuInfo.toString());
+			}
 
 			//System.out.println("** CPU sur " + host.getName() + " **");
 
 			CpuPerc[] cpuPercList = sigar.getCpuPercList();
-			CpuPerc cpuPerc = cpuPercList[0];	
-			resultat.put("user",cpuPerc.getUser()*100+"");
-			resultat.put("system",cpuPerc.getSys()*100+"");
-			resultat.put("idle",cpuPerc.getIdle()*100+"");
+			for(int i=0;i<cpuPercList.length;i++){
+				CpuPerc cpuPerc = cpuPercList[i];	
+				resultat.put("cpu"+i+"_user",cpuPerc.getUser()*100+"");
+				resultat.put("cpu"+i+"_system",cpuPerc.getSys()*100+"");
+				resultat.put("cpu"+i+"_nice",cpuPerc.getNice()*100+"");
+				resultat.put("cpu"+i+"_wait",cpuPerc.getWait()*100+"");
+				resultat.put("cpu"+i+"_idle",cpuPerc.getIdle()*100+"");
+			}
+			
 
 			
 			//System.out.println("ProcStat;: " + sigar.getProcStat());
 			ProcStat tempProcStat = sigar.getProcStat();
 			resultat.put("procIdle",tempProcStat.getIdle()+"");	
+			resultat.put("procZombie",tempProcStat.getZombie()+"");	
+			resultat.put("procStopped",tempProcStat.getStopped()+"");	
 			resultat.put("procSleeping",tempProcStat.getSleeping()+"");
+			resultat.put("procThreads",tempProcStat.getThreads()+"");
 			resultat.put("procRunning",tempProcStat.getRunning()+"");
 			resultat.put("procTotal",tempProcStat.getTotal()+"");
 		} catch (SigarException e) {

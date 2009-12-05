@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
+import supervisor.rmi.client.Host;
 import supervisor.rmi.client.View;
 
 

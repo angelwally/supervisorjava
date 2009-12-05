@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import supervisor.rmi.common.Host;
 
 
 public class ProxyLocal implements Proxy {

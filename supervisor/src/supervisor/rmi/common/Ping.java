@@ -6,6 +6,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
+import supervisor.rmi.client.Host;
+
 
 public class Ping extends GlobalPlugin{
 
@@ -17,8 +19,6 @@ public class Ping extends GlobalPlugin{
 	public Ping(Host host) throws RemoteException{
 		super(host);
 		this.name = "ping";
-		inputParams.put("[@timeout]", "1000");
-		inputParams.put("[@ipTo]", "127.0.0.1");
 	}
 	@Override
 	public ArrayList<String> getParamNameList() throws Exception {
@@ -43,10 +43,11 @@ public class Ping extends GlobalPlugin{
 			long start = System.currentTimeMillis();
 			if(address.isReachable(Integer.parseInt(inputParams.get("[@timeout]")))){
 				long end = System.currentTimeMillis();
+				resultat.put("reachable", "1");
 				resultat.put("ping", end-start+"");
 			}
 			else
-				resultat.put("ping", "impossible");
+				resultat.put("reachable", "0");
 		}
 		catch (UnknownHostException e) {
 			System.err.println("Impossible de résoudre l'hôte ");

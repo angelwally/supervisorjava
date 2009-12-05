@@ -1,7 +1,6 @@
 package supervisor.rmi.client;
 import java.rmi.RMISecurityManager;
 import java.util.ArrayList;
-import supervisor.rmi.common.Host;
 
 public class Supervisor {
 
