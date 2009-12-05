@@ -1,14 +1,14 @@
 #Fat Jar Configuration File
-#Sat Nov 28 15:21:26 CET 2009
+#Sat Dec 05 16:31:18 CET 2009
 onejar.license.required=true
 manifest.classpath=
 manifest.removesigners=true
 onejar.checkbox=false
-jarname=supervisor_fat.jar
+jarname=C\:\\Users\\Angel\\Desktop\\server.jar
 manifest.mergeall=true
-manifest.mainclass=supervisor.rmi.client.Supervisor
+manifest.mainclass=supervisor.rmi.server.Adapter
 manifest.file=<createnew>
-jarname.isextern=false
+jarname.isextern=true
 onejar.expand=
-excludes=
+excludes=<po|supervisor>~supervisor/~rmi/~client/;<po|supervisor>~config.xml
 includes=
